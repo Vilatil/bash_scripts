@@ -1,0 +1,2 @@
+echo "Display sys info"; hostnamectl
+

@@ -1,0 +1,6 @@
+#!/bin/bash
+[[ ! -x "$(command -v jq)" ]] && echo "you need to install jq" && exit 1
+API_KEY="5d8448d2cdf14d73a3791948240209"
+city="Odesa"
+website="http://api.weatherapi.com/v1/current.json?key=$API_KEY&q=$city&aqi=no"
+curl -s "$website" | jq -r '"Temperature: \(.current.temp_c)°C \nWind: \(.current.wind_kph) km/h \nLast updated: \(.current.last_updated)"'

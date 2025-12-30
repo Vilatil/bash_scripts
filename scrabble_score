@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+declare -A letters
+letters[0]="A E I O U L N R S T"
+letters[1]="D G"
+letters[2]="B C M P"
+letters[3]="F H V W Y"
+letters[4]="K"
+#8 points
+letters[5]="J X"
+#10 points
+letters[6]="Q Z"
+key=0
+sentence="${*// /}"
+uppercase="${sentence^^}"
+result=0
+for (( char=0; char < ${#uppercase}; char++)); do
+    for value in ${letters[key]}; do
+        if [[ "${uppercase:char:1}" == "$value" ]]; then
+            result+=$key
+        fi
+        done
+done
+echo "$result"

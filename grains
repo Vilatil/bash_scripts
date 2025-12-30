@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+declare -A grains
+total=0
+grain=1
+argument=$1
+if [[ "$1" == "total" ]]; then
+    argument=64
+elif [[ "$1" -gt 64 || "$1" -lt 1 ]]; then
+    echo "Error: invalid input"
+    exit 1
+fi
+for ((square=0; square <= $argument; square++)); do
+    grains[$square]="$grain"	
+    total=$((total + grain))
+	grain=$((grain * 2))
+done
+[[ "$1" == "total" ]] && echo "$total" && exit 0
+key=$((argument-1))
+echo "${grains[$key]}"
+
+

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+results=""
+(( $1 % 3 == 0 )) && results+="Pling"
+(( $1 % 5 == 0 )) && results+="Plang"
+(( $1 % 7 == 0 )) && results+="Plong"
+echo "${results:-$1}"

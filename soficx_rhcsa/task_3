@@ -1,0 +1,13 @@
+#!/bin/bash
+#Create a bash script that can create user10, user20 and user30 accounts with each account is create a message saying " The account is created successfuly " will be displayed otherwise the script will terminate . In case of a successful account creation assign the user account a password as their username
+PASS=${which passwd}
+user=user10
+if grep -q "user10" /etc/passwd; then
+	echo "the user is already exist, i delete him"
+	sudo userdel user10
+fi
+echo "adding user10"
+sudo useradd $user
+sleep 1
+echo $user | $PASS --stdin $user
+echo "user10 done"

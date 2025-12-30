@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+numbers=$(echo "$*" | tr -d ' ')
+declare -i result
+echo "$numbers"
+for ((digit=0; digit < ${#numbers}; digit++)); do
+    if [[ ${numbers:digit:1} != [0-9] ]]; then
+        echo "false"
+        exit 1
+    elif (($digit%2 == 0)); then
+        even=$((${numbers:digit:1}*2))
+        if [[ $even -gt 9 ]]; then
+            result+=$((even-9))
+        else
+            result+=$((${numbers:digit:1}*2))
+        fi
+    else
+    	result+=${numbers:digit:1}
+	fi
+done
+[[ "${result: -1}" == "0" ]] && echo "true" || echo "false"

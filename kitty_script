@@ -1,0 +1,7 @@
+#!/bin/bash
+
+for filename in /home/patron1/.config/kitty/kitty-themes/themes/*; do
+	echo "$filename"
+	echo "$filename" >> text.txt
+	kitty -o include="$filename"
+done

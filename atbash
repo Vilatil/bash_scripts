@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+key_word="$1"
+plain="abcdefghijklmnopqrstuvwxyz"
+cypher="zyxwvutsrqponmlkjihgfedcba"
+result=""
+if [[ "$key_word" == "encode" ]]; then 
+    shift
+	whole_sentence=$(echo "$*" | tr -d ' ,*')
+    whole_sentence=${whole_sentence,,}
+    for ((element=0; element < ${#whole_sentence}; element++)); do
+		for ((letter=0; letter < 26; letter++)); do
+            if [[ "${whole_sentence:element:1}" == [0-9] ]]; then
+                [[ $(( element% 5 )) -eq 0 && $element -ne 0 ]] && result+=" "
+                result+="${whole_sentence:element:1}"
+                ((element++))
+			elif [[ "${whole_sentence:element:1}" == "${plain:letter:1}" ]]; then
+                [[ $(( element% 5 )) -eq 0 && $element -ne 0 ]] && result+=" "
+				result+="${cypher:letter:1}"
+			fi
+		done
+if [[ "$key_word" == "decode" ]]; then 
+    shift
+	whole_sentence=$(echo "$*" | tr -d ' ,*')
+    whole_sentence=${whole_sentence,,}
+    for ((element=0; element < ${#whole_sentence}; element++)); do
+		for ((letter=0; letter < 26; letter++)); do
+            if [[ "${whole_sentence:element:1}" == [0-9] ]]; then
+                result+="${whole_sentence:element:1}"
+                ((element++))
+			elif [[ "${whole_sentence:element:1}" == "${plain:letter:1}" ]]; then
+				result+="${cypher:letter:1}"
+			fi
+		done
+done
+fi
+echo "$result"

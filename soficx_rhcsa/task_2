@@ -1,0 +1,4 @@
+echo "all arguments: $*"
+echo "first argument: $1"
+echo "PID of the script: $$"
+echo "count of the all supplied argument: $#"

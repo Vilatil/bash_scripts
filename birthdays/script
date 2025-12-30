@@ -1,0 +1,13 @@
+#!/bin/bash
+
+today="$(date +"%d/%m")"
+INFILE="$HOME/bash_scripts/birthdays/birthday_list.txt"
+
+add_date() {
+	echo "" >> "$INFILE"
+}
+while IFS= read -r line; do
+	if echo "$line" | grep -q "$today"; then
+		echo "today is ${line}"
+	fi
+done < "$INFILE"
